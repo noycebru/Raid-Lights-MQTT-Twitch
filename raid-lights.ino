@@ -23,8 +23,6 @@ void setup() {
 
   setupWIFI();
  
-  setupWIFI();
-
   setupMQTT();
 }
 
@@ -34,7 +32,8 @@ void setupSerial() {
 }
 
 void setupPins() {
-    pinMode(LED_PIN, OUTPUT);
+    pinMode(RAID_LIGHTS_1_2_PIN, OUTPUT);
+    pinMode(RAID_LIGHTS_3_4_PIN, OUTPUT);
 }
 
 void setupWIFI() {
@@ -130,11 +129,17 @@ void activateRobot(long activateTime) {
   Serial.print("activateRobot called: ");
   Serial.println(activateTime);
 
+  // We turn on the lights
+  digitalWrite(RAID_LIGHTS_1_2_PIN, HIGH);
+  digitalWrite(RAID_LIGHTS_3_4_PIN, HIGH);
+  delay(activateTime); // now wait for the provided time
 
-  // TODO: Add code for new robot here
+  // Turn off the lights now
+  digitalWrite(RAID_LIGHTS_1_2_PIN, LOW);
+  digitalWrite(RAID_LIGHTS_3_4_PIN, LOW);
+  delay(25);
 
 
   Serial.println("activateRobot completed!");
   Serial.println();
-
 }
